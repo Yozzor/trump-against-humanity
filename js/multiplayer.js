@@ -1,5 +1,17 @@
 // Multiplayer Manager using Socket.io
 
+// Use global configuration from config.js
+const CONFIG = window.TRUMP_CONFIG || {
+    // Fallback configuration if config.js fails to load
+    isDevelopment: true,
+    BACKEND_URL: 'http://localhost:3000',
+    socketOptions: {
+        transports: ['websocket', 'polling'],
+        timeout: 20000,
+        forceNew: true
+    }
+};
+
 class MultiplayerManager {
     constructor() {
         this.socket = null;
@@ -62,8 +74,10 @@ class MultiplayerManager {
 
     connectToServer() {
         try {
-            // Connect to Socket.io server
-            this.socket = io();
+            console.log(`🔌 Connecting to backend: ${CONFIG.BACKEND_URL}`);
+
+            // Connect to Socket.io server with environment-specific configuration
+            this.socket = io(CONFIG.BACKEND_URL, CONFIG.socketOptions);
 
             this.socket.on('connect', () => {
                 console.log('Connected to server');

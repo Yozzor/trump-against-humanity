@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Against Humanity - Deployment Helper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #d32f2f;
+            border-radius: 5px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #d32f2f;
+        }
+        .url-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            background: #d32f2f;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #b71c1c;
+        }
+        .success {
+            background: #e8f5e8;
+            border-left-color: #4caf50;
+            color: #2e7d32;
+        }
+        .warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+            color: #f57c00;
+        }
+        .code {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎺 Trump Against Humanity Deployment Helper</h1>
+        
+        <div class="step">
+            <h3>Step 1: Backend URL Configuration</h3>
+            <p>After deploying to Render, enter your backend URL here:</p>
+            <input type="text" id="backendUrl" class="url-input" placeholder="https://your-app.onrender.com" />
+            <button class="btn" onclick="updateConfig()">Update Configuration</button>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Download Updated Files</h3>
+            <p>Click to download the updated configuration file:</p>
+            <button class="btn" onclick="downloadConfig()" id="downloadBtn" disabled>Download config.js</button>
+        </div>
+
+        <div class="step warning">
+            <h3>Step 3: Upload to Namecheap</h3>
+            <p><strong>Files to upload to public_html:</strong></p>
+            <ul>
+                <li>index.html</li>
+                <li>css/ (entire folder)</li>
+                <li>js/ (entire folder) - including updated config.js</li>
+                <li>images/ (entire folder)</li>
+            </ul>
+            <p><strong>Do NOT upload:</strong> server.js, package.json, node_modules/, .git/</p>
+        </div>
+
+        <div class="step success" id="testStep" style="display: none;">
+            <h3>Step 4: Test Your Deployment</h3>
+            <p>Test these URLs after deployment:</p>
+            <div class="code">
+                <div>Frontend: <span id="frontendTestUrl">https://yourdomain.com</span></div>
+                <div>Backend Health: <span id="backendTestUrl">https://your-app.onrender.com/health</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let updatedConfig = '';
+
+        function updateConfig() {
+            const backendUrl = document.getElementById('backendUrl').value.trim();
+            
+            if (!backendUrl) {
+                alert('Please enter your Render backend URL');
+                return;
+            }
+
+            if (!backendUrl.startsWith('https://') || !backendUrl.includes('.onrender.com')) {
+                alert('Please enter a valid Render URL (https://your-app.onrender.com)');
+                return;
+            }
+
+            // Generate updated config.js content
+            updatedConfig = `// Configuration for Trump Against Humanity
+// This file contains environment-specific settings
+
+window.TRUMP_CONFIG = {
+    // Environment detection
+    isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+    
+    // Backend server configuration
+    BACKEND_URL: (() => {
+        // Auto-detect environment and return appropriate backend URL
+        const hostname = window.location.hostname;
+        
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            // Development environment
+            return 'http://localhost:3000';
+        } else {
+            // Production environment - UPDATED FOR DEPLOYMENT
+            return '${backendUrl}';
+        }
+    })(),
+    
+    // Socket.io connection options
+    socketOptions: {
+        transports: ['websocket', 'polling'],
+        timeout: 20000,
+        forceNew: true,
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000
+    },
+    
+    // Game configuration
+    game: {
+        maxPlayers: 5,
+        minPlayers: 2,
+        roundTimer: 60, // seconds
+        judgeTimer: 30  // seconds
+    },
+    
+    // Debug settings
+    debug: window.location.hostname === 'localhost'
+};
+
+// Log configuration on load
+console.log('🎺 Trump Against Humanity Configuration:');
+console.log(\`🌍 Environment: \${window.TRUMP_CONFIG.isDevelopment ? 'Development' : 'Production'}\`);
+console.log(\`🔗 Backend URL: \${window.TRUMP_CONFIG.BACKEND_URL}\`);
+console.log(\`🐛 Debug mode: \${window.TRUMP_CONFIG.debug ? 'ON' : 'OFF'}\`);
+
+// Export for use in other files
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = window.TRUMP_CONFIG;
+}`;
+
+            document.getElementById('downloadBtn').disabled = false;
+            document.getElementById('testStep').style.display = 'block';
+            document.getElementById('backendTestUrl').textContent = backendUrl + '/health';
+            
+            alert('Configuration updated! Now download the config.js file.');
+        }
+
+        function downloadConfig() {
+            if (!updatedConfig) {
+                alert('Please update the configuration first');
+                return;
+            }
+
+            const blob = new Blob([updatedConfig], { type: 'text/javascript' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'config.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert('config.js downloaded! Replace the existing file in your js/ folder before uploading to Namecheap.');
+        }
+    </script>
+</body>
+</html>
