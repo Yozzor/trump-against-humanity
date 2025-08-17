@@ -7,17 +7,61 @@ const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const server = http.createServer(app);
+
+// Environment configuration
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+// CORS configuration for production
+const corsOptions = {
+    origin: NODE_ENV === 'production'
+        ? [FRONTEND_URL, process.env.ALLOWED_ORIGINS?.split(',') || []].flat().filter(Boolean)
+        : "*",
+    methods: ["GET", "POST"],
+    credentials: true
+};
+
 const io = socketIo(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
+    cors: corsOptions
 });
 
-const PORT = process.env.PORT || 3000;
+console.log(`🚀 Server starting in ${NODE_ENV} mode`);
+console.log(`🌐 CORS configured for: ${NODE_ENV === 'production' ? FRONTEND_URL : 'all origins'}`);
+console.log(`🔌 Port: ${PORT}`);
 
-// Serve static files
-app.use(express.static(path.join(__dirname)));
+// Middleware
+app.use(express.json());
+
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        environment: NODE_ENV,
+        activeLobbies: lobbies.size,
+        activePlayers: players.size
+    });
+});
+
+// API status endpoint
+app.get('/api/status', (req, res) => {
+    res.status(200).json({
+        message: 'Trump Against Humanity API is running tremendously!',
+        version: '1.0.0',
+        environment: NODE_ENV
+    });
+});
+
+// Serve static files (only in development)
+if (NODE_ENV === 'development') {
+    app.use(express.static(path.join(__dirname)));
+
+    // Serve index.html for development
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, 'index.html'));
+    });
+}
 
 // Game state management
 const lobbies = new Map();
@@ -745,9 +789,18 @@ setInterval(() => {
 }, 5 * 60 * 1000);
 
 // Start server
-server.listen(PORT, () => {
-    console.log(`Trump by South Park server running on port ${PORT}`);
-    console.log(`Visit http://localhost:${PORT} to play the most tremendous game ever!`);
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`🎺 Trump Against Humanity server running on port ${PORT}`);
+    console.log(`🌍 Environment: ${NODE_ENV}`);
+    console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+    console.log(`🎮 API status: http://localhost:${PORT}/api/status`);
+
+    if (NODE_ENV === 'development') {
+        console.log(`🏠 Local website: http://localhost:${PORT}`);
+    } else {
+        console.log(`🚀 Production server ready for connections!`);
+        console.log(`🌐 Accepting connections from: ${FRONTEND_URL}`);
+    }
 });
 
 // Graceful shutdown
