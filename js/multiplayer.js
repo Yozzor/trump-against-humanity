@@ -74,6 +74,12 @@ class MultiplayerManager {
 
     connectToServer() {
         try {
+            if (typeof io === 'undefined') {
+                console.error('❌ Socket.io not loaded yet');
+                setTimeout(() => this.connectToServer(), 500);
+                return;
+            }
+
             console.log(`🔌 Connecting to backend: ${CONFIG.BACKEND_URL}`);
 
             // Connect to Socket.io server with environment-specific configuration
@@ -1933,9 +1939,19 @@ class MultiplayerManager {
     }
 }
 
-// Initialize multiplayer manager when DOM is loaded
+// Initialize multiplayer manager when DOM is loaded and Socket.io is available
 document.addEventListener('DOMContentLoaded', () => {
-    window.multiplayerManager = new MultiplayerManager();
+    function initializeMultiplayer() {
+        if (typeof io !== 'undefined') {
+            console.log('🎮 Initializing multiplayer manager...');
+            window.multiplayerManager = new MultiplayerManager();
+        } else {
+            console.log('⏳ Waiting for Socket.io to load...');
+            setTimeout(initializeMultiplayer, 100);
+        }
+    }
+
+    initializeMultiplayer();
 });
 
 // Add CSS for lobby waiting room and game interface

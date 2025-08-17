@@ -14,9 +14,8 @@ window.TRUMP_CONFIG = {
             // Development environment
             return 'http://localhost:3000';
         } else {
-            // Production environment
-            // TODO: Update this URL after deploying to Render
-            return 'https://trump-against-humanity.onrender.com';
+            // Production environment - UPDATED FOR DEPLOYMENT
+            return 'https://trump-against-humanity.onrender.com/';
         }
     })(),
     

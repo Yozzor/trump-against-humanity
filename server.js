@@ -71,106 +71,102 @@ const players = new Map();
 function getShuffledDeck() {
     const cards = [
         // Classic Trump Phrases
-        "the fake news media",
-        "tremendous success",
-        "very smart people",
-        "believe me",
-        "China",
-        "the best deal ever",
-        "crooked politicians",
-        "beautiful phone call",
+        "the fake news media", "tremendous success", "very smart people", "believe me", "China",
+        "the best deal ever", "crooked politicians", "beautiful phone call", "tremendous phone call",
+        "perfect conversation", "witch hunt", "total disaster", "complete hoax", "rigged election",
+        "stolen votes", "massive fraud", "incredible ratings", "record crowds", "standing ovation",
 
-        // More Trump Vocabulary
-        "tremendous phone call",
-        "perfect conversation",
-        "witch hunt",
-        "total disaster",
-        "complete hoax",
-        "rigged election",
-        "stolen votes",
-        "massive fraud",
-        "incredible ratings",
-        "record crowds",
-        "standing ovation",
-        "fake polls",
-        "corrupt media",
-        "radical left",
-        "deep state",
-        "swamp creatures",
-        "establishment politicians",
-        "career politicians",
-        "sleepy Joe",
-        "crazy Nancy",
-        "shifty Schiff",
-        "pencil neck",
-        "low energy",
-        "sad loser",
-        "total lightweight",
-        "third-rate politician",
-        "nasty woman",
-        "crooked Hillary",
-        "little Marco",
-        "lyin' Ted",
-        "rocket man",
-        "fire and fury",
-        "nuclear button",
-        "very stable genius",
-        "covfefe",
-        "alternative facts",
-        "tremendous crowds",
-        "biggest inauguration",
-        "perfect phone call",
-        "no collusion",
-        "total exoneration",
-        "presidential harassment",
-        "angry Democrats",
-        "do-nothing Democrats",
-        "radical socialist agenda",
-        "America First",
-        "Make America Great Again",
-        "tremendous wall",
-        "beautiful wall",
-        "Mexico will pay",
-        "trade war",
-        "tariffs",
-        "unfair trade deals",
-        "renegotiated NAFTA",
-        "incredible economy",
-        "best economy ever",
-        "record unemployment",
-        "booming stock market",
-        "tremendous jobs",
-        "beautiful factories",
-        "incredible military",
-        "rebuilt military",
-        "Space Force",
-        "tremendous generals",
-        "my generals",
-        "beautiful letter",
-        "love letters",
-        "fell in love",
-        "tremendous respect",
-        "incredible relationship",
-        "perfect meeting",
-        "historic summit",
-        "tremendous progress",
-        "incredible success",
-        "total victory",
-        "complete domination",
-        "tremendous power",
-        "incredible strength",
-        "unmatched wisdom",
-        "stable genius",
-        "very good genes",
-        "tremendous brain",
-        "incredible memory",
-        "perfect recall",
-        "tremendous energy",
-        "incredible stamina",
-        "perfect health",
-        "tremendous doctor",
-        "incredible results",
-        "perfect score"
+        // Political Figures & Nicknames
+        "fake polls", "corrupt media", "radical left", "deep state", "swamp creatures",
+        "establishment politicians", "career politicians", "sleepy Joe", "crazy Nancy", "shifty Schiff",
+        "pencil neck", "low energy", "sad loser", "total lightweight", "third-rate politician",
+        "nasty woman", "crooked Hillary", "little Marco", "lyin' Ted", "rocket man",
+        "fire and fury", "nuclear button", "very stable genius", "covfefe", "alternative facts",
+
+        // Campaign & Politics
+        "tremendous crowds", "biggest inauguration", "perfect phone call", "no collusion", "total exoneration",
+        "presidential harassment", "angry Democrats", "do-nothing Democrats", "radical socialist agenda",
+        "America First", "Make America Great Again", "tremendous wall", "beautiful wall", "Mexico will pay",
+        "trade war", "tariffs", "unfair trade deals", "renegotiated NAFTA", "incredible economy",
+
+        // Economy & Military
+        "best economy ever", "record unemployment", "booming stock market", "tremendous jobs", "beautiful factories",
+        "incredible military", "rebuilt military", "Space Force", "tremendous generals", "my generals",
+        "beautiful letter", "love letters", "perfect deal", "art of the deal", "tremendous negotiator",
+
+        // New Trump Vocabulary - Business & Success
+        "billion dollar empire", "luxury properties", "golden escalator", "tremendous wealth", "successful businessman",
+        "incredible brand", "world-class hotels", "magnificent towers", "beautiful golf courses", "tremendous resorts",
+        "five-star restaurants", "exclusive memberships", "premium locations", "spectacular views", "unmatched quality",
+        "tremendous value", "incredible investments", "massive profits", "record-breaking sales", "outstanding performance",
+
+        // New Trump Vocabulary - Media & Entertainment
+        "reality TV star", "tremendous ratings", "number one show", "incredible viewership", "massive audience",
+        "spectacular entertainment", "tremendous production", "award-winning performance", "incredible talent", "natural showman",
+        "tremendous charisma", "incredible presence", "commanding performance", "spectacular delivery", "tremendous energy",
+        "incredible passion", "outstanding leadership", "tremendous vision", "incredible determination", "unstoppable force",
+
+        // New Trump Vocabulary - International Relations
+        "tremendous allies", "incredible partnerships", "beautiful relationships", "perfect diplomacy", "outstanding negotiations",
+        "tremendous respect", "incredible influence", "powerful presence", "commanding authority", "tremendous leadership",
+        "incredible results", "outstanding achievements", "tremendous progress", "incredible breakthroughs", "spectacular success",
+        "beautiful agreements", "perfect understanding", "tremendous cooperation", "incredible unity", "outstanding collaboration",
+
+        // New Trump Vocabulary - Technology & Innovation
+        "tremendous technology", "incredible innovation", "cutting-edge solutions", "revolutionary advances", "spectacular breakthroughs",
+        "outstanding developments", "tremendous progress", "incredible achievements", "magnificent discoveries", "beautiful inventions",
+        "tremendous capabilities", "incredible potential", "outstanding performance", "spectacular results", "tremendous efficiency",
+        "incredible speed", "outstanding quality", "tremendous reliability", "incredible durability", "spectacular design",
+        "fell in love", "tremendous respect", "incredible relationship", "perfect meeting", "historic summit",
+        "tremendous progress", "incredible success", "total victory", "complete domination", "tremendous power",
+        "incredible strength", "unmatched wisdom", "stable genius", "very good genes", "tremendous brain",
+        "incredible memory", "perfect recall", "tremendous energy", "incredible stamina", "perfect health",
+        "tremendous doctor", "incredible results", "perfect score",
+
+        // South Park Style Trump Cards
+        "member berries", "underpants gnomes", "Cartman's authority", "Kenny's deaths", "Stan's cynicism",
+        "Kyle's lectures", "Randy's schemes", "Butters' innocence", "Towelie's wisdom", "Mr. Garrison's teaching",
+        "Chef's advice", "Principal Victoria", "Mr. Mackey's guidance", "Timmy's enthusiasm", "Jimmy's comedy",
+
+        // More Political Satire
+        "tremendous tweets", "perfect grammar", "incredible spelling", "beautiful autocorrect", "tremendous typos",
+        "incredible caps lock", "perfect punctuation", "tremendous hashtags", "incredible retweets", "beautiful mentions",
+        "tremendous followers", "incredible engagement", "perfect timing", "tremendous virality", "incredible reach",
+
+        // Business & Money
+        "tremendous bankruptcy", "incredible debt", "perfect loans", "beautiful foreclosure", "tremendous audit",
+        "incredible taxes", "perfect deductions", "tremendous write-offs", "incredible losses", "beautiful profits",
+        "tremendous revenue", "incredible margins", "perfect cash flow", "tremendous assets", "incredible liabilities",
+
+        // Food & Lifestyle
+        "tremendous hamburgers", "incredible diet coke", "perfect fast food", "beautiful steaks", "tremendous ketchup",
+        "incredible pizza", "perfect taco bowls", "tremendous chocolate cake", "incredible ice cream", "beautiful cookies",
+        "tremendous coffee", "incredible energy drinks", "perfect supplements", "tremendous vitamins", "incredible protein",
+
+        // Sports & Entertainment
+        "tremendous golf", "incredible handicap", "perfect swing", "beautiful courses", "tremendous tournaments",
+        "incredible scores", "perfect putts", "tremendous drives", "incredible accuracy", "beautiful technique",
+        "tremendous wrestling", "incredible matches", "perfect moves", "beautiful entertainment", "tremendous crowds",
+
+        // Technology & Social Media
+        "tremendous algorithms", "incredible platforms", "perfect posts", "beautiful content", "tremendous engagement",
+        "incredible metrics", "perfect analytics", "tremendous reach", "incredible influence", "beautiful branding",
+        "tremendous marketing", "incredible advertising", "perfect campaigns", "tremendous ROI", "incredible conversion",
+
+        // Weather & Natural Phenomena
+        "tremendous hurricanes", "incredible storms", "perfect weather", "beautiful sunshine", "tremendous rain",
+        "incredible snow", "perfect temperature", "tremendous wind", "incredible pressure", "beautiful clouds",
+        "tremendous lightning", "incredible thunder", "perfect rainbow", "tremendous drought", "incredible flooding",
+
+        // Animals & Nature
+        "tremendous eagles", "incredible lions", "perfect tigers", "beautiful elephants", "tremendous sharks",
+        "incredible dolphins", "perfect whales", "tremendous bears", "incredible wolves", "beautiful deer",
+        "tremendous horses", "incredible dogs", "perfect cats", "tremendous birds", "incredible fish",
+
+        // Random Trump-isms
+        "tremendous covfefe", "incredible hamberders", "perfect smocking gun", "beautiful achomlishments", "tremendous unpresidented",
+        "incredible bigly", "perfect yuge", "tremendous braggadocious", "incredible phenomenal", "beautiful fantastic",
+        "tremendous spectacular", "incredible magnificent", "perfect extraordinary", "tremendous outstanding", "incredible exceptional"
     ];
 
     // Shuffle the deck
@@ -253,26 +249,70 @@ function getShuffledPrompts() {
             text: "I have the best {0}. Everyone says so!",
             blanks: 1
         },
-        {
-            text: "The {0} love me. Tremendous support!",
-            blanks: 1
-        },
-        {
-            text: "I will make {0} great again!",
-            blanks: 1
-        },
-        {
-            text: "My {0} is unmatched. Believe me!",
-            blanks: 1
-        },
-        {
-            text: "The {0} are out of control. Sad!",
-            blanks: 1
-        },
-        {
-            text: "I fixed {0} in record time!",
-            blanks: 1
-        }
+        { text: "The {0} love me. Tremendous support!", blanks: 1 },
+        { text: "I will make {0} great again!", blanks: 1 },
+        { text: "My {0} is unmatched. Believe me!", blanks: 1 },
+        { text: "The {0} are out of control. Sad!", blanks: 1 },
+        { text: "I fixed {0} in record time!", blanks: 1 },
+
+        // More Business & Deals
+        { text: "I negotiated {0} with {1}. They got {2}!", blanks: 3 },
+        { text: "My {0} empire is worth {1}. {2} are jealous!", blanks: 3 },
+        { text: "I bought {0} for {1} and sold it for {2}. Art of the deal!", blanks: 3 },
+        { text: "The {0} wanted {1}, but I gave them {2} instead!", blanks: 3 },
+        { text: "I fired {0} because of {1}. {2} was the last straw!", blanks: 3 },
+
+        // International Relations
+        { text: "I met with {0} about {1}. We discussed {2}!", blanks: 3 },
+        { text: "The {0} called me about {1}. I told them {2}!", blanks: 3 },
+        { text: "I solved {0} with {1}. {2} said it was impossible!", blanks: 3 },
+        { text: "The summit with {0} was {1}. We achieved {2}!", blanks: 3 },
+        { text: "I wrote a {0} letter to {1} about {2}!", blanks: 3 },
+
+        // Media & Social Media
+        { text: "I tweeted about {0} and {1} went crazy! {2}!", blanks: 3 },
+        { text: "The {0} reported {1}, but the truth is {2}!", blanks: 3 },
+        { text: "My {0} post got {1} likes! {2} are seething!", blanks: 3 },
+        { text: "I exposed {0} for {1}. {2} can't handle the truth!", blanks: 3 },
+        { text: "The interview about {0} was {1}. {2} loved it!", blanks: 3 },
+
+        // Sports & Entertainment
+        { text: "I played golf with {0} and shot {1}. {2} was impressed!", blanks: 3 },
+        { text: "My {0} show had {1} viewers! {2} are jealous!", blanks: 3 },
+        { text: "I attended {0} and met {1}. We talked about {2}!", blanks: 3 },
+        { text: "The {0} game was {1}. I predicted {2}!", blanks: 3 },
+        { text: "I endorsed {0} for {1}. {2} will win bigly!", blanks: 3 },
+
+        // Food & Lifestyle
+        { text: "I ordered {0} with {1}. The chef said {2}!", blanks: 3 },
+        { text: "My diet of {0} and {1} keeps me {2}!", blanks: 3 },
+        { text: "I discovered {0} at {1}. {2} recommended it!", blanks: 3 },
+        { text: "The {0} restaurant served {1}. I told them {2}!", blanks: 3 },
+        { text: "I invented {0} with {1}. {2} will be huge!", blanks: 3 },
+
+        // More Single Blanks for Variety
+        { text: "I am tremendously {0}!", blanks: 1 },
+        { text: "The {0} are fake news!", blanks: 1 },
+        { text: "I love {0}. The best!", blanks: 1 },
+        { text: "Nobody does {0} like me!", blanks: 1 },
+        { text: "I invented {0}. True story!", blanks: 1 },
+        { text: "The {0} are rigged!", blanks: 1 },
+        { text: "I will build {0}!", blanks: 1 },
+        { text: "My {0} are incredible!", blanks: 1 },
+        { text: "I defeated {0} easily!", blanks: 1 },
+        { text: "The {0} are tremendous!", blanks: 1 },
+
+        // Two Blank Variety
+        { text: "I turned {0} into {1}. Magic!", blanks: 2 },
+        { text: "The {0} gave me {1}. Tremendous honor!", blanks: 2 },
+        { text: "I replaced {0} with {1}. Much better!", blanks: 2 },
+        { text: "My {0} beats {1} every time!", blanks: 2 },
+        { text: "I chose {0} over {1}. Smart move!", blanks: 2 },
+        { text: "The {0} wanted {1}. I said no!", blanks: 2 },
+        { text: "I combined {0} with {1}. Genius!", blanks: 2 },
+        { text: "My {0} impressed {1} bigly!", blanks: 2 },
+        { text: "I saved {0} from {1}. Hero!", blanks: 2 },
+        { text: "The {0} copied my {1}. Sad!", blanks: 2 }
     ];
 
     // Shuffle the prompts

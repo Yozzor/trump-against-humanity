@@ -354,31 +354,15 @@
     <script src="js/navigation.js"></script>
     <script src="js/game.js"></script>
 
-    <!-- Socket.io with CDN fallback -->
-    <script src="/socket.io/socket.io.js" onerror="loadSocketIOFromCDN()"></script>
+    <!-- Socket.io - Load from CDN directly for production -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
-        function loadSocketIOFromCDN() {
-            console.log('🔧 Local Socket.io failed, loading from CDN...');
-            const script = document.createElement('script');
-            script.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
-            script.onload = function() {
-                console.log('✅ Socket.io loaded from CDN successfully');
-            };
-            script.onerror = function() {
-                console.error('❌ Failed to load Socket.io from CDN');
-            };
-            document.head.appendChild(script);
+        // Verify Socket.io loaded
+        if (typeof io !== 'undefined') {
+            console.log('✅ Socket.io loaded successfully from CDN');
+        } else {
+            console.error('❌ Failed to load Socket.io');
         }
-
-        // Additional check after page load
-        window.addEventListener('load', function() {
-            if (typeof io === 'undefined') {
-                console.log('🔧 Socket.io not available, attempting CDN load...');
-                loadSocketIOFromCDN();
-            } else {
-                console.log('✅ Socket.io loaded successfully');
-            }
-        });
     </script>
 
     <!-- Configuration -->
