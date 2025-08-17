@@ -325,7 +325,20 @@ function getShuffledPrompts() {
 }
 
 function drawCards(deck, count) {
+    if (deck.length < count) {
+        console.log(`⚠️ Warning: Trying to draw ${count} cards but only ${deck.length} available`);
+        return deck.splice(0, deck.length); // Return whatever is available
+    }
     return deck.splice(0, count);
+}
+
+function ensureDeckSize(gameState, minCards = 50) {
+    if (gameState.deck.length < minCards) {
+        console.log(`🔄 Deck has ${gameState.deck.length} cards, reshuffling to ensure variety...`);
+        const newDeck = getShuffledDeck();
+        gameState.deck = [...gameState.deck, ...newDeck];
+        console.log(`✅ Deck replenished, now has ${gameState.deck.length} cards`);
+    }
 }
 
 function buildPublicGameState(lobby) {
@@ -612,10 +625,13 @@ io.on('connection', (socket) => {
         };
 
         // Deal initial hands and set first prompt
-        lobby.players.forEach(p => {
+        console.log(`🃏 Dealing initial hands to ${lobby.players.length} players from deck of ${gameState.deck.length} cards`);
+        lobby.players.forEach((p, index) => {
             gameState.hands[p.id] = drawCards(gameState.deck, 8);
+            console.log(`🎯 Dealt 8 cards to ${p.name}, remaining deck: ${gameState.deck.length}`);
         });
         gameState.currentPrompt = gameState.prompts[0];
+        console.log(`📝 First prompt: "${gameState.currentPrompt.text}" (${gameState.currentPrompt.blanks} blanks)`);
 
         lobby.gameState = gameState;
 
@@ -683,6 +699,12 @@ io.on('connection', (socket) => {
         // Convert selection indices to actual cards
         const selectedCards = playerSelection.map(index => gs.hands[player.id][index]);
 
+        // CRITICAL FIX: Remove played cards from player's hand
+        const sortedIndices = [...playerSelection].sort((a, b) => b - a); // Sort descending to avoid index shifting
+        sortedIndices.forEach(index => {
+            gs.hands[player.id].splice(index, 1);
+        });
+
         // Add to submissions
         gs.submissions = gs.submissions || [];
         gs.submissions.push({
@@ -694,6 +716,8 @@ io.on('connection', (socket) => {
         if (gs.playerSelections) {
             gs.playerSelections[player.id] = [];
         }
+
+        console.log(`🃏 ${player.name} played ${selectedCards.length} cards, hand size now: ${gs.hands[player.id].length}`);
 
         console.log(`📤 ${player.name} submitted cards:`, selectedCards);
 
@@ -761,6 +785,26 @@ io.on('connection', (socket) => {
         gs.roundWinner = null;
         gs.winningCombination = null;
         gs.phase = 'playing';
+
+        // CRITICAL FIX: Replenish each player's hand with new cards
+        ensureDeckSize(gs, lobby.players.length * 3); // Ensure enough cards for all players
+
+        lobby.players.forEach(p => {
+            const currentHand = gs.hands[p.id] || [];
+            const cardsNeeded = 8 - currentHand.length; // Ensure each player has 8 cards
+
+            if (cardsNeeded > 0) {
+                // Draw new cards to fill hand
+                const newCards = drawCards(gs.deck, cardsNeeded);
+                gs.hands[p.id] = [...currentHand, ...newCards];
+                console.log(`🃏 Dealt ${cardsNeeded} new cards to ${p.name}, hand size: ${gs.hands[p.id].length}`);
+            }
+        });
+
+        // Clear player selections for new round
+        gs.playerSelections = {};
+
+        console.log(`🎮 Round ${gs.currentRound} started, judge: ${lobby.players[gs.currentJudgeIndex].name}`);
         io.to(lobby.id).emit('game-updated', buildPublicGameState(lobby));
     });
 
