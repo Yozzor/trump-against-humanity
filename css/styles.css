@@ -1,0 +1,2372 @@
+/* Trump by South Park - Newspaper Texture Design 2024-2025 */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Performance Optimizations */
+* {
+    /* Use GPU acceleration for better performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+:root {
+    /* 2025 Newspaper Color Palette - Authentic Print Media */
+    --newspaper-cream: #F7F3E9;
+    --newspaper-aged: #F0EBD8;
+    --newspaper-ink: #2C2C2C;
+    --newspaper-faded-ink: #4A4A4A;
+    --trump-red: #DC143C;
+    --trump-gold: #DAA520;
+    --trump-blue: #1E3A8A;
+    --newsprint-gray: #E8E3D3;
+    --vintage-yellow: #FFF8DC;
+    --ink-stain: #1A1A1A;
+    --paper-shadow: rgba(0, 0, 0, 0.1);
+    --text-shadow: rgba(0, 0, 0, 0.3);
+
+    /* Typography - Bold 2025 Trends */
+    --font-headline: 'Playfair Display', 'Times New Roman', serif;
+    --font-body: 'Merriweather', 'Georgia', serif;
+    --font-accent: 'Space Grotesk', 'Arial Black', sans-serif;
+
+    /* Newspaper Texture Variables */
+    --paper-texture: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0.96 0 0 0 0 0.92 0 0 0 0 0.85 0 0 0 0.05 0"/></filter></defs><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    --ink-splatter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><circle cx="25" cy="25" r="2" fill="%23000" opacity="0.03"/><circle cx="15" cy="35" r="1" fill="%23000" opacity="0.02"/><circle cx="35" cy="15" r="1.5" fill="%23000" opacity="0.025"/></svg>');
+
+    /* Spacing */
+    --section-padding: 60px 0;
+    --container-max-width: 1400px;
+    --newspaper-margin: 40px;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    background-image:
+        var(--paper-texture),
+        var(--ink-splatter),
+        linear-gradient(45deg, var(--newspaper-cream) 0%, var(--newspaper-aged) 100%);
+    background-size: 200px 200px, 100px 100px, cover;
+    background-attachment: scroll, scroll, scroll; /* Changed from fixed for performance */
+    overflow-x: hidden;
+    position: relative;
+    /* Performance optimizations */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Trump cursor */
+    cursor: url('images/trump mouth 4.png') 16 16, auto;
+}
+
+/* Trump hover cursors for interactive elements */
+a, button, .btn, .social-link, .social-link-compact, .feature, .lobby-item,
+img, video, select, .game-card, [onclick], [role="button"],
+input[type="button"], input[type="submit"], .article-thumb {
+    cursor: url('images/trump mouth1.png') 16 16, pointer !important;
+}
+
+/* Special cursor for text inputs */
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], textarea {
+    cursor: text !important;
+}
+
+/* Newspaper Texture Overlay - Reduced opacity */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(218, 165, 32, 0.01) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(220, 20, 60, 0.005) 0%, transparent 50%),
+        linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.003) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Newspaper Column Effect - Behind content */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 299px,
+        rgba(0,0,0,0.005) 300px,
+        rgba(0,0,0,0.005) 301px,
+        transparent 302px
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Container - Newspaper Layout */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--newspaper-margin);
+    position: relative;
+    z-index: 3;
+    background: rgba(247, 243, 233, 0.8);
+    backdrop-filter: blur(0.5px);
+    border-left: 1px solid rgba(44, 44, 44, 0.1);
+    border-right: 1px solid rgba(44, 44, 44, 0.1);
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,0.02),
+        0 0 30px rgba(0,0,0,0.05);
+}
+
+/* Newspaper Masthead */
+.newspaper-masthead {
+    background: var(--newspaper-cream);
+    border-bottom: 4px double var(--newspaper-ink);
+    padding: 20px 0;
+    position: relative;
+    z-index: 100;
+}
+
+.masthead-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--newspaper-margin);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--newspaper-ink);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.publication-info {
+    display: flex;
+    gap: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--newspaper-ink);
+}
+
+.masthead-main {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.newspaper-title h1 {
+    font-family: var(--font-headline);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: var(--newspaper-ink);
+    margin: 0;
+    text-shadow:
+        2px 2px 0px rgba(0,0,0,0.1),
+        4px 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.newspaper-title .subtitle {
+    font-family: var(--font-accent);
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--trump-red);
+    text-transform: uppercase;
+    margin-top: 5px;
+    border-top: 1px solid var(--newspaper-ink);
+    border-bottom: 1px solid var(--newspaper-ink);
+    padding: 8px 0;
+    display: inline-block;
+    min-width: 300px;
+}
+
+.masthead-bottom {
+    text-align: center;
+    border-top: 1px solid var(--newspaper-ink);
+    padding-top: 15px;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-left: var(--newspaper-margin);
+    padding-right: var(--newspaper-margin);
+}
+
+.tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--newspaper-ink);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.edition-info {
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--newspaper-faded-ink);
+}
+
+.edition-info .separator {
+    margin: 0 10px;
+    color: var(--trump-red);
+    font-weight: 900;
+}
+
+/* News Ticker */
+.news-ticker {
+    background: var(--newspaper-ink);
+    color: var(--newspaper-cream);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    overflow: hidden;
+    border-top: 2px solid var(--trump-red);
+    border-bottom: 2px solid var(--trump-red);
+    position: relative;
+    z-index: 99;
+}
+
+.ticker-label {
+    background: var(--trump-red);
+    color: var(--newspaper-cream);
+    padding: 0 20px;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    border-right: 2px solid var(--newspaper-cream);
+    position: relative;
+}
+
+.ticker-label::before {
+    content: '★';
+    position: absolute;
+    left: 5px;
+    color: var(--newspaper-cream);
+    font-size: 1.2rem;
+}
+
+.ticker-label::after {
+    content: '★';
+    position: absolute;
+    right: 5px;
+    color: var(--newspaper-cream);
+    font-size: 1.2rem;
+}
+
+.ticker-content {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-text {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    animation: scroll-ticker 120s linear infinite;
+    padding-left: 100%;
+}
+
+@keyframes scroll-ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pause ticker on hover */
+.ticker-text:hover {
+    animation-play-state: paused;
+}
+
+/* Typography - Authentic Newspaper Style */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--newspaper-ink);
+    text-shadow: 1px 1px 2px var(--text-shadow);
+    position: relative;
+    /* Newspaper-specific typography */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Newspaper Headline Effects */
+h1 {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--newspaper-ink) 0%, var(--newspaper-faded-ink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: -0.01em;
+    border-bottom: 3px solid var(--trump-red);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--trump-red);
+    font-weight: 800;
+}
+
+/* Newspaper Body Text */
+p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: justify;
+    hyphens: auto;
+    color: var(--newspaper-ink);
+    /* Traditional newspaper text styling */
+    text-rendering: optimizeLegibility;
+    word-spacing: 0.1em;
+    letter-spacing: 0.01em;
+    text-justify: inter-word;
+    orphans: 2;
+    widows: 2;
+}
+
+/* Buttons - Newspaper Print Style */
+.btn {
+    display: inline-block;
+    padding: 18px 40px;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 3px solid;
+    border-radius: 0;
+    cursor: pointer;
+    /* Optimized transitions for performance */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    background: var(--newspaper-cream);
+    box-shadow:
+        4px 4px 0px var(--newspaper-ink),
+        8px 8px 0px rgba(44, 44, 44, 0.2);
+    transform: translateZ(0);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--trump-red) 0%, #B91C3C 100%);
+    color: var(--newspaper-cream);
+    border-color: var(--newspaper-ink);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.btn-primary:hover {
+    transform: translate(-2px, -2px);
+    box-shadow:
+        6px 6px 0px var(--newspaper-ink),
+        12px 12px 0px rgba(44, 44, 44, 0.3);
+}
+
+.btn-secondary {
+    background: var(--newspaper-cream);
+    color: var(--newspaper-ink);
+    border-color: var(--newspaper-ink);
+}
+
+.btn-secondary:hover {
+    background: var(--newspaper-ink);
+    color: var(--newspaper-cream);
+    transform: translate(-2px, -2px);
+    box-shadow:
+        6px 6px 0px var(--trump-red),
+        12px 12px 0px rgba(220, 20, 60, 0.3);
+}
+
+/* Section Headers - Newspaper Style */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+    padding: 40px 0;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--newspaper-ink), transparent);
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--newspaper-ink), transparent);
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--newspaper-ink);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    background: var(--newspaper-cream);
+    padding: 0 30px;
+}
+
+.section-divider {
+    width: 150px;
+    height: 6px;
+    background: linear-gradient(90deg, var(--trump-red), var(--trump-gold), var(--trump-red));
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--newspaper-ink);
+    z-index: -1;
+}
+
+/* Newspaper Layout System */
+.newspaper-layout {
+    background: var(--newspaper-cream);
+    min-height: 100vh;
+    position: relative;
+    /* Add newspaper texture and aging effects */
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 108, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(120, 119, 108, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 108, 0.02) 0%, transparent 50%);
+}
+
+.newspaper-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 40px var(--newspaper-margin);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    background: var(--newspaper-cream);
+    border-left: 3px double var(--newspaper-ink);
+    border-right: 3px double var(--newspaper-ink);
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,0.02),
+        0 0 30px rgba(0,0,0,0.05),
+        inset 0 0 1px rgba(0,0,0,0.1);
+    /* Add newspaper fold effect */
+    position: relative;
+}
+
+.newspaper-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(44, 44, 44, 0.1) 20%,
+        rgba(44, 44, 44, 0.2) 50%,
+        rgba(44, 44, 44, 0.1) 80%,
+        transparent 100%
+    );
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* Lead Story Styling */
+.lead-story {
+    grid-column: 1 / -1;
+    border-bottom: 3px double var(--newspaper-ink);
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.lead-story::after {
+    content: '★ ★ ★';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--newspaper-cream);
+    padding: 0 20px;
+    color: var(--trump-red);
+    font-size: 1.2rem;
+    letter-spacing: 10px;
+}
+
+.article-header {
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--newspaper-ink);
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.article-header::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(
+        to right,
+        var(--newspaper-ink) 0px,
+        var(--newspaper-ink) 10px,
+        transparent 10px,
+        transparent 15px
+    );
+}
+
+.article-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--trump-red);
+}
+
+.headline {
+    font-family: var(--font-headline);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--newspaper-ink);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    /* Newspaper headline styling */
+    text-rendering: optimizeLegibility;
+    word-spacing: -0.05em;
+    font-stretch: condensed;
+}
+
+.subheadline {
+    font-family: var(--font-body);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 600;
+    color: var(--trump-red);
+    font-style: italic;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    /* Newspaper subheadline styling */
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.02em;
+}
+
+.byline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--newspaper-faded-ink);
+    border-top: 1px solid var(--newspaper-ink);
+    padding-top: 8px;
+    /* Newspaper byline styling */
+    text-rendering: optimizeLegibility;
+    font-variant: small-caps;
+}
+
+.article-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.article-image {
+    position: relative;
+}
+
+.article-image img {
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--newspaper-ink);
+    filter: sepia(10%) contrast(1.1) brightness(0.95);
+}
+
+.caption {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--newspaper-faded-ink);
+    margin-top: 8px;
+    padding: 5px 0;
+    border-top: 1px solid rgba(44, 44, 44, 0.2);
+    line-height: 1.4;
+    /* Newspaper caption styling */
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.article-text {
+    column-count: 2;
+    column-gap: 25px;
+    column-rule: 1px solid rgba(44, 44, 44, 0.2);
+    text-align: justify;
+    hyphens: auto;
+    /* Enhanced newspaper text styling */
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    word-spacing: 0.05em;
+    text-justify: inter-word;
+}
+
+.lead-paragraph {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;
+    color: var(--newspaper-ink) !important;
+    column-span: all;
+    border-bottom: 1px solid rgba(44, 44, 44, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    /* Lead paragraph newspaper styling */
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.01em;
+    word-spacing: 0.02em;
+}
+
+/* Drop cap for lead paragraph */
+.lead-paragraph::first-letter {
+    float: left;
+    font-family: var(--font-headline);
+    font-size: 4em;
+    line-height: 0.8;
+    padding-right: 8px;
+    padding-top: 4px;
+    margin-bottom: -2px;
+    color: var(--trump-red);
+    font-weight: 900;
+}
+
+.article-actions {
+    column-span: all;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--newspaper-ink);
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Secondary Articles */
+.secondary-articles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.newspaper-article {
+    border: 2px solid var(--newspaper-ink);
+    padding: 15px;
+    background: rgba(247, 243, 233, 0.8);
+    position: relative;
+}
+
+.newspaper-article::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid var(--newspaper-faded-ink);
+    pointer-events: none;
+}
+
+.article-headline {
+    font-family: var(--font-headline);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 900;
+    color: var(--newspaper-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--trump-red);
+    padding-bottom: 5px;
+    line-height: 1.1;
+    /* Secondary headline styling */
+    text-rendering: optimizeLegibility;
+    font-stretch: condensed;
+}
+
+.article-byline {
+    font-family: var(--font-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--newspaper-faded-ink);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.article-body {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: justify;
+    hyphens: auto;
+    /* Article body typography */
+    text-rendering: optimizeLegibility;
+    word-spacing: 0.05em;
+    text-justify: inter-word;
+}
+
+.article-body p {
+    margin-bottom: 12px;
+    color: var(--newspaper-ink);
+    /* Paragraph spacing for articles */
+    text-indent: 1em;
+}
+
+.article-body p:first-child {
+    text-indent: 0;
+}
+
+/* Newspaper-style quotation marks */
+.article-text p:has(q),
+.article-body p:has(q) {
+    position: relative;
+}
+
+q {
+    quotes: """ """ "'" "'";
+    font-style: italic;
+}
+
+q::before {
+    content: open-quote;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--trump-red);
+}
+
+q::after {
+    content: close-quote;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--trump-red);
+}
+
+/* Sidebar Styling */
+.newspaper-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebar-box {
+    border: 2px solid var(--newspaper-ink);
+    background: var(--newspaper-aged);
+    padding: 15px;
+    position: relative;
+    /* Add newspaper box styling */
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.05),
+        2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-box::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 1px dashed var(--newspaper-ink);
+    pointer-events: none;
+}
+
+.sidebar-box::after {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--newspaper-cream);
+    color: var(--trump-red);
+    font-size: 1rem;
+    padding: 0 5px;
+}
+
+.sidebar-headline {
+    font-family: var(--font-headline);
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--newspaper-ink);
+    margin-bottom: 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--newspaper-ink);
+    padding-bottom: 5px;
+}
+
+.social-links-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.social-link-compact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--newspaper-cream);
+    border: 1px solid var(--newspaper-ink);
+    text-decoration: none;
+    color: var(--newspaper-ink);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.social-link-compact:hover {
+    background: var(--trump-red);
+    color: var(--newspaper-cream);
+}
+
+.social-link-compact.dextools:hover {
+    background: #05D9E8;
+    color: var(--newspaper-ink);
+}
+
+.market-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.market-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--newspaper-faded-ink);
+    font-size: 0.8rem;
+}
+
+.market-item .label {
+    font-weight: 600;
+    color: var(--newspaper-faded-ink);
+}
+
+.market-item .value {
+    font-weight: 700;
+    color: var(--trump-red);
+}
+
+.advertisement {
+    background: var(--newspaper-cream) !important;
+    border-style: dashed !important;
+}
+
+/* Quick Articles Styling */
+.quick-article {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px dashed rgba(44, 44, 44, 0.3);
+    margin-bottom: 12px;
+}
+
+.quick-article:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.article-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border: 1px solid var(--newspaper-ink);
+    flex-shrink: 0;
+}
+
+.article-content h5 {
+    font-family: var(--font-accent);
+    font-size: 0.75rem;
+    font-weight: 900;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--trump-red);
+}
+
+.article-content p {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    margin: 0;
+    text-align: left;
+    text-indent: 0;
+    color: var(--newspaper-ink);
+}
+
+/* Classified Ads Styling */
+.classified-ads {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.classified-ad {
+    padding: 8px;
+    border: 1px solid rgba(44, 44, 44, 0.2);
+    background: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.classified-ad:nth-child(odd) {
+    background: rgba(248, 246, 238, 0.5);
+}
+
+.classified-ad p {
+    margin: 0;
+    text-align: left;
+    text-indent: 0;
+}
+
+.ad-headline {
+    background: var(--newspaper-ink);
+    color: var(--newspaper-cream);
+    margin: -15px -15px 15px -15px;
+    padding: 8px 15px;
+    text-align: center;
+}
+
+.ad-content {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.ad-content p {
+    margin-bottom: 8px;
+}
+
+.ad-footer {
+    font-style: italic;
+    color: var(--newspaper-faded-ink);
+    text-align: center;
+    margin-top: 10px;
+    border-top: 1px solid var(--newspaper-faded-ink);
+    padding-top: 5px;
+}
+
+/* Game Interface Preview */
+.game-interface-preview {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px dashed var(--newspaper-ink);
+    background: rgba(247, 243, 233, 0.5);
+}
+
+/* Game Interface Positioning - Embedded in newspaper */
+#game-interface {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 3px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#game-interface .trump-tweet-game {
+    background: var(--newspaper-cream);
+    color: var(--newspaper-ink);
+}
+
+#game-interface .close-game-btn {
+    background: var(--trump-red);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#game-interface .close-game-btn:hover {
+    background: #b71c1c;
+}
+
+#lobby-system {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    border-radius: 10px;
+}
+
+.name-registration h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--newspaper-ink);
+}
+
+.name-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#player-name {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+}
+
+#set-name-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+}
+
+/* Hero Section - Newspaper Front Page */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    background:
+        var(--newspaper-cream),
+        radial-gradient(circle at 30% 70%, rgba(220, 20, 60, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(218, 165, 32, 0.05) 0%, transparent 50%);
+    overflow: hidden;
+    border-top: 8px solid var(--newspaper-ink);
+    border-bottom: 8px solid var(--newspaper-ink);
+    /* Performance optimization */
+    will-change: transform;
+    contain: layout style paint;
+}
+
+/* Newspaper Masthead Effect */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 39px,
+            rgba(44, 44, 44, 0.02) 40px,
+            rgba(44, 44, 44, 0.02) 41px,
+            transparent 42px
+        );
+    z-index: 1;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/trumpbg1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    z-index: 2;
+    filter: sepia(20%) contrast(1.2) brightness(0.9);
+    mix-blend-mode: multiply;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 60px var(--newspaper-margin);
+    background: transparent;
+    border: 2px solid var(--newspaper-ink);
+    box-shadow:
+        inset 0 0 50px rgba(0,0,0,0.03),
+        0 20px 40px rgba(0,0,0,0.08);
+}
+
+.hero-text {
+    color: var(--newspaper-ink);
+    position: relative;
+    z-index: 15;
+}
+
+/* Newspaper Column Divider */
+.hero-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -40px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--newspaper-ink), transparent);
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    line-height: 0.9;
+    color: #1a1a1a !important;
+    text-shadow:
+        2px 2px 0px rgba(255,255,255,1),
+        4px 4px 8px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #c41e3a !important;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-left: 6px solid var(--trump-gold);
+    padding-left: 20px;
+    background: linear-gradient(90deg, rgba(218, 165, 32, 0.1), transparent);
+    text-shadow:
+        1px 1px 0px rgba(255,255,255,1),
+        2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-description {
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    line-height: 1.8;
+    text-align: justify;
+    hyphens: auto;
+    color: #2a2a2a !important;
+    font-style: italic;
+    font-weight: 500;
+    border-top: 1px solid rgba(44, 44, 44, 0.2);
+    border-bottom: 1px solid rgba(44, 44, 44, 0.2);
+    padding: 30px 0;
+    text-shadow:
+        1px 1px 0px rgba(255,255,255,1),
+        2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.hero-character {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 12;
+}
+
+/* Newspaper Photo Frame Effect */
+.hero-character::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 3px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    z-index: -1;
+    transform: rotate(-1deg);
+    box-shadow:
+        0 0 0 6px var(--newspaper-cream),
+        0 0 0 9px var(--newspaper-ink),
+        10px 10px 20px rgba(0,0,0,0.2);
+}
+
+.trump-character {
+    position: relative;
+    z-index: 13;
+    max-width: 100%;
+    height: auto;
+    filter:
+        sepia(10%)
+        contrast(1.1)
+        brightness(0.95)
+        drop-shadow(0 0 30px rgba(218, 165, 32, 0.4));
+    border: 2px solid var(--newspaper-ink);
+}
+
+/* Newspaper Stamp Effect for Animation */
+.animation-container {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 4;
+    width: 180px;
+    height: 180px;
+    border: 4px solid var(--trump-red);
+    background: var(--newspaper-cream);
+    transform: rotate(5deg);
+    box-shadow:
+        0 0 0 4px var(--newspaper-cream),
+        0 0 0 8px var(--newspaper-ink),
+        15px 15px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.animation-container::before {
+    content: 'LIVE';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px dashed var(--trump-red);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: var(--trump-red);
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    z-index: 5;
+    background: transparent;
+}
+
+.hero-animation {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(5%) contrast(1.1);
+    /* Optimized for static image instead of video */
+    image-rendering: crisp-edges;
+}
+
+/* About Section - Newspaper Article Layout */
+.about-section {
+    padding: var(--section-padding);
+    background:
+        var(--newspaper-aged),
+        linear-gradient(45deg, var(--newspaper-aged) 0%, var(--newspaper-cream) 100%);
+    position: relative;
+    border-top: 4px double var(--newspaper-ink);
+    border-bottom: 4px double var(--newspaper-ink);
+}
+
+/* Newspaper Article Columns */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 399px,
+        rgba(44, 44, 44, 0.05) 400px,
+        rgba(44, 44, 44, 0.05) 402px,
+        transparent 403px
+    );
+    pointer-events: none;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(247, 243, 233, 0.9);
+    padding: 60px;
+    border: 2px solid var(--newspaper-ink);
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,0.03),
+        0 15px 30px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.about-text h3 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--trump-red);
+    margin-bottom: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid var(--trump-gold);
+    padding-bottom: 20px;
+    background: linear-gradient(135deg, var(--trump-red) 0%, #B91C3C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-align: justify;
+    hyphens: auto;
+    line-height: 1.8;
+    color: var(--newspaper-faded-ink);
+    text-indent: 2em;
+}
+
+.about-text p:first-of-type::first-letter {
+    font-size: 4rem;
+    font-weight: 900;
+    float: left;
+    line-height: 3rem;
+    margin: 0.2rem 0.5rem 0 0;
+    color: var(--trump-red);
+    font-family: var(--font-headline);
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.feature {
+    text-align: center;
+    padding: 40px 30px;
+    border: 3px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    position: relative;
+    transform: rotate(-0.5deg);
+    box-shadow:
+        0 0 0 6px var(--newspaper-aged),
+        0 0 0 9px var(--newspaper-ink),
+        10px 10px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.feature:nth-child(even) {
+    transform: rotate(0.5deg);
+}
+
+.feature:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.feature h4 {
+    font-size: 1.8rem;
+    color: var(--trump-blue);
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: var(--newspaper-faded-ink);
+    text-indent: 0;
+    text-align: center;
+}
+
+/* Game Section - Newspaper Classified Ads Style */
+.game-section {
+    padding: var(--section-padding);
+    background:
+        var(--newsprint-gray),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 19px,
+            rgba(44, 44, 44, 0.03) 20px,
+            rgba(44, 44, 44, 0.03) 21px,
+            transparent 22px
+        );
+    border-top: 6px solid var(--newspaper-ink);
+    border-bottom: 6px solid var(--newspaper-ink);
+    position: relative;
+}
+
+/* Classified Ads Border Pattern */
+.game-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 9px,
+            rgba(44, 44, 44, 0.02) 10px,
+            rgba(44, 44, 44, 0.02) 11px,
+            transparent 12px
+        );
+    pointer-events: none;
+}
+
+.name-registration {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    background: var(--newspaper-cream);
+    padding: 50px 40px;
+    border: 4px double var(--newspaper-ink);
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,0.05),
+        0 15px 30px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.name-registration::before {
+    content: '★ PLAYER REGISTRATION ★';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--trump-red);
+    color: var(--newspaper-cream);
+    padding: 8px 20px;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    border: 2px solid var(--newspaper-ink);
+}
+
+.name-registration h3 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--trump-red);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+}
+
+.name-input-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#player-name {
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    border: 3px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    min-width: 300px;
+    font-family: var(--font-body);
+    color: var(--newspaper-ink);
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#player-name:focus {
+    outline: none;
+    border-color: var(--trump-red);
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(220, 20, 60, 0.2),
+        0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Lobby System - Newspaper Classified Ads */
+.lobby-system {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.lobby-controls {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.lobby-creation {
+    background: var(--newspaper-cream);
+    padding: 40px;
+    border: 4px double var(--newspaper-ink);
+    margin-bottom: 40px;
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,0.05),
+        0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.lobby-creation::before {
+    content: '★ CREATE LOBBY ★';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--trump-blue);
+    color: var(--newspaper-cream);
+    padding: 8px 20px;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    border: 2px solid var(--newspaper-ink);
+}
+
+.lobby-creation h4 {
+    text-align: center;
+    color: var(--trump-red);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lobby-form {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lobby-form input,
+.lobby-form select {
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: 3px solid var(--newspaper-ink);
+    background: var(--newspaper-cream);
+    font-family: var(--font-body);
+    color: var(--newspaper-ink);
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 4px 8px rgba(0,0,0,0.1);
+}
+
+.lobby-form input:focus,
+.lobby-form select:focus {
+    outline: none;
+    border-color: var(--trump-red);
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(220, 20, 60, 0.2);
+}
+
+.available-lobbies {
+    background: var(--newspaper-cream);
+    padding: 40px;
+    border: 4px double var(--newspaper-ink);
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,0.05),
+        0 10px 20px rgba(0,0,0,0.1);
+}
+
+.available-lobbies h4 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--trump-blue);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    border-bottom: 3px solid var(--trump-gold);
+    padding-bottom: 15px;
+}
+
+.lobbies-list {
+    display: grid;
+    gap: 20px;
+}
+
+/* Socials Section - Newspaper Classified Style */
+.socials-section {
+    padding: var(--section-padding);
+    background:
+        var(--newspaper-ink),
+        linear-gradient(135deg, var(--newspaper-ink) 0%, #1a1a1a 100%);
+    color: var(--newspaper-cream);
+    position: relative;
+    border-top: 8px double var(--trump-gold);
+}
+
+/* Newspaper Print Dots Pattern */
+.socials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 25% 25%, rgba(218, 165, 32, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(220, 20, 60, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px, 30px 30px;
+    pointer-events: none;
+}
+
+.socials-section .section-title {
+    color: var(--newspaper-cream);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.socials-section .section-header::before,
+.socials-section .section-header::after {
+    background: linear-gradient(90deg, transparent, var(--trump-gold), transparent);
+}
+
+.socials-description {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 35px;
+    background: linear-gradient(135deg, var(--trump-red) 0%, #B91C3C 100%);
+    color: var(--newspaper-cream);
+    text-decoration: none;
+    font-weight: 900;
+    font-family: var(--font-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid var(--trump-gold);
+    box-shadow:
+        0 0 0 3px var(--newspaper-ink),
+        0 8px 16px rgba(0,0,0,0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+}
+
+.social-link:hover::before {
+    left: 100%;
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg, var(--trump-gold) 0%, #B8860B 100%);
+    color: var(--newspaper-ink);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        0 0 0 3px var(--newspaper-ink),
+        0 15px 30px rgba(0,0,0,0.4);
+}
+
+.social-icon {
+    font-size: 1.8rem;
+}
+
+.social-text {
+    font-size: 1.1rem;
+}
+
+/* Footer - Newspaper Bottom */
+.footer {
+    background:
+        var(--newspaper-ink),
+        linear-gradient(180deg, #2C2C2C 0%, #1a1a1a 100%);
+    color: var(--newspaper-cream);
+    text-align: center;
+    padding: 50px 0;
+    border-top: 6px double var(--trump-gold);
+    position: relative;
+}
+
+.footer::before {
+    content: '◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--newspaper-cream);
+    color: var(--trump-red);
+    padding: 0 20px;
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+}
+
+.footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--trump-red), var(--trump-gold), var(--trump-red));
+}
+
+.footer p {
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(247, 243, 233, 0.8);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Responsive Design - Mobile Newspaper Layout */
+@media (max-width: 768px) {
+    :root {
+        --newspaper-margin: 20px;
+        --section-padding: 40px 0;
+    }
+
+    .masthead-top {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .publication-info {
+        gap: 10px;
+        font-size: 0.7rem;
+    }
+
+    .newspaper-title h1 {
+        font-size: clamp(2rem, 12vw, 3.5rem);
+        letter-spacing: 4px;
+    }
+
+    .newspaper-title .subtitle {
+        font-size: clamp(0.7rem, 3vw, 1rem);
+        letter-spacing: 2px;
+        min-width: 200px;
+    }
+
+    .weather-box {
+        padding: 6px 10px;
+    }
+
+    .news-ticker {
+        height: 35px;
+    }
+
+    .ticker-label {
+        padding: 0 15px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .ticker-text {
+        font-size: 0.8rem;
+    }
+
+    .newspaper-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px var(--newspaper-margin);
+    }
+
+    .article-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .article-text {
+        column-count: 1;
+    }
+
+    .headline {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        letter-spacing: 1px;
+    }
+
+    .subheadline {
+        font-size: clamp(1rem, 4vw, 1.3rem);
+    }
+
+    .byline {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+
+    .article-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    body::after {
+        background: none; /* Remove column lines on mobile */
+    }
+
+    .container {
+        padding: 0 var(--newspaper-margin);
+        border-left: none;
+        border-right: none;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+        padding: 40px var(--newspaper-margin);
+    }
+
+    .hero-text::after {
+        display: none; /* Remove column divider on mobile */
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        letter-spacing: 2px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.2rem, 6vw, 2rem);
+        border-left: 4px solid var(--trump-gold);
+        padding-left: 15px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        letter-spacing: 2px;
+    }
+
+    .animation-container {
+        width: 120px;
+        height: 120px;
+        top: 20px;
+        right: 20px;
+    }
+
+    .about-content {
+        padding: 40px 30px;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .feature {
+        transform: rotate(0deg);
+        padding: 30px 20px;
+    }
+
+    .name-registration {
+        padding: 40px 30px;
+        margin: 0 auto 40px;
+    }
+
+    .name-input-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #player-name {
+        min-width: 100%;
+        padding: 15px 20px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .social-link {
+        padding: 18px 30px;
+        width: 250px;
+        justify-content: center;
+    }
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .hero-content {
+        gap: 60px;
+        padding: 50px var(--newspaper-margin);
+    }
+
+    .about-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .animation-container {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Large Screen Enhancements */
+@media (min-width: 1400px) {
+    .hero-content {
+        padding: 80px var(--newspaper-margin);
+    }
+
+    .section-title {
+        font-size: 5rem;
+    }
+
+    .animation-container {
+        width: 200px;
+        height: 200px;
+        top: 60px;
+        right: 60px;
+    }
+}
+
+/* Additional Newspaper Effects */
+
+/* Newspaper Ink Bleed Effect */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(44, 44, 44, 0.1) 20%,
+        rgba(44, 44, 44, 0.05) 50%,
+        rgba(44, 44, 44, 0.1) 80%,
+        transparent 100%);
+    z-index: 4;
+}
+
+/* Newspaper Fold Effect */
+.about-section::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(44, 44, 44, 0.1) 50%,
+        transparent 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Print Registration Marks */
+body::after {
+    content: '';
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--newspaper-ink);
+    border-radius: 50%;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Newspaper Masthead Date */
+.hero-section .container::before {
+    content: 'ESTABLISHED 2024 • MAKING MEMES GREAT AGAIN • VOLUME 1';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--newspaper-faded-ink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--newspaper-cream);
+    padding: 5px 20px;
+    border: 1px solid var(--newspaper-ink);
+    white-space: nowrap;
+}
+
+/* Newspaper Weather Box Style for Animation */
+.animation-container::after {
+    content: 'LIVE FEED';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-accent);
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: var(--trump-red);
+    letter-spacing: 1px;
+    background: rgba(247, 243, 233, 0.9);
+    padding: 2px 8px;
+    border: 1px solid var(--trump-red);
+}
+
+/* Newspaper Classified Border for Game Section */
+.game-section .container {
+    border: 3px dashed var(--newspaper-ink);
+    background: rgba(247, 243, 233, 0.95);
+    padding: 60px var(--newspaper-margin);
+    margin: 40px auto;
+    position: relative;
+}
+
+.game-section .container::before {
+    content: '★ TRUMP AGAINST HUMANITY ★';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--newsprint-gray);
+    color: var(--newspaper-ink);
+    padding: 8px 20px;
+    font-family: var(--font-accent);
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    border: 2px solid var(--newspaper-ink);
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.game-header h2 {
+    font-family: var(--font-accent);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: white;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0px var(--trump-gold);
+}
+
+.game-header p {
+    font-size: 1.2rem;
+    color: var(--newspaper-ink);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Newspaper Print Quality Effect */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .hero-section,
+    .about-section,
+    .game-section,
+    .socials-section {
+        background: white !important;
+        color: black !important;
+    }
+
+    .btn {
+        border: 2px solid black !important;
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* Card Selection Styles */
+.white-card {
+    background: white;
+    border: 2px solid var(--newspaper-ink);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.4;
+    position: relative;
+    font-family: var(--font-body);
+    color: var(--newspaper-ink);
+}
+
+.white-card:hover {
+    border-color: var(--trump-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.white-card.selected {
+    border-color: var(--trump-red) !important;
+    background: #fff5f5 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(220, 38, 127, 0.4) !important;
+}
+
+.white-card.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: var(--trump-red);
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.hand-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.submit-cards-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.submit-cards-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ccc !important;
+    color: #666 !important;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-bottom: 2px solid var(--newspaper-ink);
+}
+
+.game-header h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: var(--newspaper-faded-ink);
+}
+
+.black-card-area {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.black-card {
+    background: var(--newspaper-ink);
+    color: var(--newspaper-cream);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.player-hand h3 {
+    text-align: center;
+    color: var(--trump-red);
+    margin-bottom: 20px;
+}
+
+/* Live News Article Styles */
+.live-news-article {
+    border-left: 4px solid #ff0000;
+    background: rgba(255, 0, 0, 0.02);
+}
+
+.live-indicator {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 0.9em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.live-video-container {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.live-news-feed {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border: 2px solid var(--newspaper-ink);
+    border-radius: 4px;
+}
+
+.video-caption {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+    text-align: center;
+}
