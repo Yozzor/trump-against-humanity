@@ -923,6 +923,21 @@ q::after {
     color: var(--newspaper-cream);
 }
 
+.social-link-compact.telegram:hover {
+    background: #0088cc;
+    color: var(--newspaper-cream);
+}
+
+.social-link-compact.telegram-memes:hover {
+    background: #ff6b35;
+    color: var(--newspaper-cream);
+}
+
+.social-link-compact.twitter:hover {
+    background: #1da1f2;
+    color: var(--newspaper-cream);
+}
+
 .social-link-compact.dextools:hover {
     background: #05D9E8;
     color: var(--newspaper-ink);
